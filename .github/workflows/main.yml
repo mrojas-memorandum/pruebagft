@@ -1,0 +1,21 @@
+name: Descomprimir ZIP
+on:
+  push:
+    paths:
+      - 'pricing-service.zip'
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extraer y limpiar
+        run: |
+          unzip -o pricing-service.zip
+          rm pricing-service.zip
+          git config user.name "mrojas-memorandum"
+          git config user.email "miguel.rojper@yahoo.com"
+          git add .
+          git commit -m "Descomprimir pricing-service.zip"
+          git push
